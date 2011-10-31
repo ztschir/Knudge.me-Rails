@@ -1,5 +1,7 @@
 source 'http://rubygems.org'
 
+gem "paperclip", "~> 2.4"
+
 gem 'rails', '3.1.1'
 
 # Bundle edge Rails instead:
@@ -30,7 +32,11 @@ gem 'jquery-rails'
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
 
+group :development do
+  gem 'rspec-rails', '2.0.1'
+end
 group :test do
-  # Pretty printed test output
+  gem 'rspec', '2.0.1' 
+  gem 'webrat', '0.7.1'
   gem 'turn', :require => false
 end
