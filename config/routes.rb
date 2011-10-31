@@ -1,4 +1,8 @@
 KnudgeMe::Application.routes.draw do
+  get "pages/home"
+
+  get "pages/team"
+
   resources :transactions
 
   resources :users
