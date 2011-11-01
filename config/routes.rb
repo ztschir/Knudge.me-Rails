@@ -5,9 +5,9 @@ KnudgeMe::Application.routes.draw do
   # Map URLs to controller
   root :to => 'pages#home'
   match '/team', :to => 'pages#team'
+  match '/signup', :to => 'users#new'
 
   resources :transactions
-
   resources :users
 
   # The priority is based upon order of creation:
