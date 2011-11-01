@@ -1,7 +1,10 @@
 KnudgeMe::Application.routes.draw do
   get "pages/home"
-
   get "pages/team"
+  
+  # Map URLs to controller
+  root :to => 'pages#home'
+  match '/team', :to => 'pages#team'
 
   resources :transactions
 
