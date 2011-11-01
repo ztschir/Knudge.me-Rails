@@ -33,10 +33,11 @@ gem 'jquery-rails'
 # gem 'ruby-debug19', :require => 'ruby-debug'
 
 group :development do
-  gem 'rspec-rails', '2.0.1'
+  gem "rspec-rails", "~> 2.4"
+  gem 'annotate', :git => 'git://github.com/ctran/annotate_models.git'
 end
 group :test do
-  gem 'rspec', '2.0.1' 
+  gem "rspec-rails", "~> 2.4"
   gem 'webrat', '0.7.1'
   gem 'turn', :require => false
 end
