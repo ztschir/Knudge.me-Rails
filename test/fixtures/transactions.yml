@@ -1,0 +1,32 @@
+# == Schema Information
+#
+# Table name: transactions
+#
+#  id            :integer         not null, primary key
+#  user_id       :integer
+#  timeStamp     :datetime
+#  name          :string(255)
+#  amount        :decimal(, )
+#  debitOrCredit :boolean
+#  category_id   :integer
+#  created_at    :datetime
+#  updated_at    :datetime
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  user_id: 1
+  timeStamp: 2011-10-30 20:57:31
+  name: MyString
+  amount: 9.99
+  debitOrCredit: false
+  category_id: 1
+
+two:
+  user_id: 1
+  timeStamp: 2011-10-30 20:57:31
+  name: MyString
+  amount: 9.99
+  debitOrCredit: false
+  category_id: 1

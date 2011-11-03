@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>User:</b>
+  <%= @transaction.user_id %>
+</p>
+
+<p>
+  <b>Timestamp:</b>
+  <%= @transaction.timeStamp %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%= @transaction.name %>
+</p>
+
+<p>
+  <b>Amount:</b>
+  <%= @transaction.amount %>
+</p>
+
+<p>
+  <b>Debitorcredit:</b>
+  <%= @transaction.debitOrCredit %>
+</p>
+
+<p>
+  <b>Category:</b>
+  <%= @transaction.category_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_transaction_path(@transaction) %> |
+<%= link_to 'Back', transactions_path %>
