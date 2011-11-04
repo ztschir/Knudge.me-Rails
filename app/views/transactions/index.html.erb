@@ -21,9 +21,6 @@
     <td><%= transaction.amount %></td>
     <td><%= transaction.debitOrCredit %></td>
     <td><%= transaction.category_id %></td>
-    <td><%= link_to 'Show', transaction %></td>
-    <td><%= link_to 'Edit', edit_transaction_path(transaction) %></td>
-    <td><%= link_to 'Destroy', transaction, confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
 </table>

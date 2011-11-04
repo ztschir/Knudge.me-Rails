@@ -1,8 +1,11 @@
 class UsersController < ApplicationController
   # GET /users
   # GET /users.json
+  before_filter :authenticate, :only => [:edit, :update, :show]
+  before_filter :correct_user, :only => [:edit, :update, :show]
+  
   def index
-    @users = User.all
+    @user = current_user
 
     respond_to do |format|
       format.html # index.html.erb
@@ -10,10 +13,8 @@ class UsersController < ApplicationController
     end
   end
 
-  # GET /users/1
-  # GET /users/1.json
   def show
-    @user = User.find(params[:id])
+    @user = current_user
 
     respond_to do |format|
       format.html # show.html.erb
@@ -35,14 +36,13 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
-    @user = User.find(params[:id])
+    @title = "Edit user"
   end
 
   # POST /users
   # POST /users.json
   def create
     @user = User.new(params[:user])
-
     respond_to do |format|
       if @user.save
         sign_in @user
@@ -56,26 +56,27 @@ class UsersController < ApplicationController
     end
   end
 
-  # PUT /users/1
-  # PUT /users/1.json
   def update
-    @user = User.find(params[:id])
+    @user = current_user
 
     respond_to do |format|
       if @user.update_attributes(params[:user])
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
-        format.json { head :ok }
+        flash[:success] = "Profile updated."
+        format.html { redirect_to @user }
+        #format.json { head :ok }
       else
+        @title = "Edit user"
         format.html { render action: "edit" }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+        #format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
   end
+  
 
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
-    @user = User.find(params[:id])
+    @user = current_user
     @user.destroy
 
     respond_to do |format|
@@ -83,4 +84,14 @@ class UsersController < ApplicationController
       format.json { head :ok }
     end
   end
+  
+  private
+    def authenticate
+      deny_access unless signed_in?
+    end
+    def correct_user
+      @user = User.find(params[:id]) 
+      redirect_to(root_path) unless current_user?(@user)
+    end
+  
 end

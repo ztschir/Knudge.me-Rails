@@ -34,23 +34,53 @@ a:visited {
 	color: #069;
 }
 
+/* signin button */
+signin {
+	float: right;
+}
+
+signin ul { 
+	margin: 0; 
+	padding: 0;
+}
+signin ul li { 
+	list-style-type: none; 
+	display: inline-block; 
+	padding: 0.2em 0;
+}
+
+signin ul li a { 
+	padding: 0 5px; 
+	font-size:100%;
+	color: #000;
+}
+signin ul li a:visited { 
+	color: #000;
+}
+signin ul li a:hover { 
+	text-decoration: underline;
+	color: #000;
+}
+
+
 /* Navigation */
 nav {
 	float: middle;
-}
-nav {
 	background-color: black; 
 	padding: 1em 1em; 
 	white-space: nowrap;
 }
 nav ul { 
-	margin: 0; 
+	margin: 0;
 	padding: 0;
 }
 nav ul li { 
 	list-style-type: none; 
 	display: inline-block; 
 	padding: 0.2em 0;
+	margin-left:auto;
+	margin-right:auto;
+	width:35%;
 }
 
 nav ul li a { 

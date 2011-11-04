@@ -1,19 +1,25 @@
 <header>
 <%= link_to logo, root_path %>
+
+<signin>
+	<ul>
+		<% if signed_in? %>
+			<li><%= link_to "Sign out", signout_path, :method => :delete %></li> 
+		<% else %>
+			<li><%= link_to "Sign in", signin_path %></li>
+		<% end %>
+	</ul>
+</signin>
+
 <nav class="round">
 	<ul>
 		<li><%= link_to "Home", root_path %></li> 
 		<li><%= link_to "Team", team_path %></li> 
 		
 		<% if signed_in? %>
-			<li><%= link_to "Account Settings", current_user %></li>
-		<% end %>
-		
-		<% if signed_in? %>
-			<li><%= link_to "Sign out", signout_path, :method => :delete %></li> 
-		<% else %>
-			<li><%= link_to "Sign in", signin_path %></li>
+			<li><%= link_to "Account Settings", edit_user_path(current_user) %></li>
 		<% end %>
 	</ul> 
 </nav>
+
 </header>
