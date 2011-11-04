@@ -2,12 +2,10 @@
 
 <table>
   <tr>
-    <th>User</th>
     <th>Timestamp</th>
     <th>Name</th>
     <th>Amount</th>
     <th>Debitorcredit</th>
-    <th>Category</th>
     <th></th>
     <th></th>
     <th></th>
@@ -15,16 +13,12 @@
 
 <% @transactions.each do |transaction| %>
   <tr>
-    <td><%= transaction.user_id %></td>
     <td><%= transaction.timeStamp %></td>
     <td><%= transaction.name %></td>
     <td><%= transaction.amount %></td>
     <td><%= transaction.debitOrCredit %></td>
-    <td><%= transaction.category_id %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
-
-<%= link_to 'New Transaction', new_transaction_path %>

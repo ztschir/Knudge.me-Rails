@@ -14,7 +14,9 @@
 #
 
 class Transaction < ActiveRecord::Base
-  
+  attr_accessible :timeStamp, :name, :amount, :debitOrCredit
   # Relationships
   belongs_to :users
+  
+  default_scope :order => 'transactions.created_at DESC'
 end

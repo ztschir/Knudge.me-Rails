@@ -10,5 +10,6 @@ class CreateTransactions < ActiveRecord::Migration
 
       t.timestamps
     end
+    add_index :transactions, :user_id
   end
 end
