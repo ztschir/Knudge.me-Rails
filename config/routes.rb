@@ -1,4 +1,6 @@
 KnudgeMe::Application.routes.draw do
+  get "sessions/new"
+
   get "pages/home"
   get "pages/team"
   
@@ -6,7 +8,10 @@ KnudgeMe::Application.routes.draw do
   root :to => 'pages#home'
   match '/team', :to => 'pages#team'
   match '/signup', :to => 'users#new'
+  match '/signin',  :to => 'sessions#new'
+  match '/signout', :to => 'sessions#destroy'
 
+  resources :sessions, :only => [:new, :create, :destroy]
   resources :transactions
   resources :users
 
