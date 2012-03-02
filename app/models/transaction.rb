@@ -18,5 +18,5 @@ class Transaction < ActiveRecord::Base
   # Relationships
   belongs_to :users
   
-  default_scope :order => 'transactions.created_at DESC'
+  default_scope :order => 'transactions.timeStamp DESC'
 end

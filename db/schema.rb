@@ -11,30 +11,43 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111103033812) do
+ActiveRecord::Schema.define(:version => 0) do
 
-  create_table "transactions", :force => true do |t|
-    t.integer  "user_id"
-    t.datetime "timeStamp"
-    t.string   "name"
-    t.decimal  "amount"
-    t.boolean  "debitOrCredit"
-    t.integer  "category_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+  create_table "userContentService", :force => true do |t|
+    t.integer   "contentServiceID", :default => 0, :null => false
+    t.integer   "userID",           :default => 0, :null => false
+    t.timestamp "created_at",                      :null => false
+    t.timestamp "updated_at",                      :null => false
   end
 
   create_table "users", :force => true do |t|
-    t.string   "firstName"
-    t.string   "middleName"
-    t.string   "lastName"
-    t.string   "email"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "encrypted_password"
-    t.string   "salt"
+    t.string    "firstName"
+    t.string    "middleName"
+    t.string    "lastName"
+    t.string    "username",                              :null => false
+    t.string    "email",                                 :null => false
+    t.string    "encryptedPassword",                     :null => false
+    t.binary    "yodleeUserContext", :limit => 16777215
+    t.timestamp "created_at",                            :null => false
+    t.timestamp "updated_at",                            :null => false
+    t.string    "salt"
   end
 
-  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
+  create_table "yodleeContentServiceInfo", :force => true do |t|
+    t.integer "contentServiceId",          :limit => 8
+    t.integer "serviceId",                 :limit => 8
+    t.string  "contentServiceDisplayName"
+    t.string  "contactUrl"
+    t.string  "contactPhoneNumber"
+    t.string  "contactEmailAddress"
+    t.string  "homeUrl"
+    t.string  "siteDisplayName"
+    t.integer "siteId",                    :limit => 8
+    t.string  "loginUrl"
+    t.string  "organizationDisplayName"
+    t.integer "organizationId",            :limit => 8
+    t.string  "passwordHelpUrl"
+    t.string  "registrationUrl"
+  end
 
 end

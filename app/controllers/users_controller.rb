@@ -4,6 +4,12 @@ class UsersController < ApplicationController
   before_filter :authenticate, :only => [:edit, :update, :show]
   before_filter :correct_user, :only => [:edit, :update, :show]
   
+  require 'java'
+  require 'YodleeClient.jar'
+  module KnudgeMeYodleeCall
+    include_package "com.KnudgeMeYodlee"
+  end
+  
   def index
     @user = current_user
 
@@ -27,7 +33,6 @@ class UsersController < ApplicationController
   def new
     @title = "Sign Up"
     @user = User.new
-
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @user }
@@ -42,11 +47,12 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
-    @user = User.new(params[:user])
+    #@user = User.new(params[:user])
+    userID = KnudgeMeYodleeCall::KnudgeMeYodlee.registrarYodleeUser(params[:user][:email], params[:user][:password])
     respond_to do |format|
-      if @user.save
-        sign_in @user
-        flash[:success] = "Welcome to the Knudge.Me"
+      if userID != -1
+        sign_in find_by_id(@userID)
+        flash[:success] = "Welcome to Knudge.Me"
         format.html { redirect_to @user }
       else
         format.html { render action: "new" }

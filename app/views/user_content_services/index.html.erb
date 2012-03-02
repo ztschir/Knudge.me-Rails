@@ -1,0 +1,19 @@
+<div id="full_form">
+<div id="new_bank">
+<%= form_for @userBanks, :remote => true do |f| %>
+<div id="error-messages">
+
+</div>
+  <p>
+    <%= f.label :content_tokens, "Banks" %><br />
+    <%= f.text_field :content_tokens %>
+  </p>
+  <p>
+	<%= submit_tag "Add Bank", :id=> "addBank"%>
+
+  </p>
+<% end %>
+</div>
+<div id="bank-container">
+</div>
+</div>

@@ -11,6 +11,8 @@ KnudgeMe::Application.routes.draw do
   match '/signin',  :to => 'sessions#new'
   match '/signout', :to => 'sessions#destroy'
 
+  resources :yodlee_content_service_info
+  resources :user_content_services
   resources :sessions, :only => [:new, :create, :destroy]
   resources :transactions
   resources :users

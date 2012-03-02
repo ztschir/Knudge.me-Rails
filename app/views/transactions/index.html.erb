@@ -2,10 +2,9 @@
 
 <table>
   <tr>
-    <th>Timestamp</th>
-    <th>Name</th>
-    <th>Amount</th>
-    <th>Debitorcredit</th>
+    <th><%= sortable "Timestamp" %></th>
+    <th><%= sortable "Name" %></th>
+    <th><%= sortable "Amount" %></th>
     <th></th>
     <th></th>
     <th></th>
@@ -15,8 +14,7 @@
   <tr>
     <td><%= transaction.timeStamp %></td>
     <td><%= transaction.name %></td>
-    <td><%= transaction.amount %></td>
-    <td><%= transaction.debitOrCredit %></td>
+    <td><%= convertAmount(transaction.amount, transaction.debitOrCredit) %></td>
   </tr>
 <% end %>
 </table>

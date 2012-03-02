@@ -67,7 +67,7 @@ signin ul li a:hover {
 nav {
 	float: middle;
 	background-color: black; 
-	padding: 1em 1em; 
+	padding: 0.5em 1em; 
 	white-space: nowrap;
 }
 nav ul { 
@@ -78,14 +78,11 @@ nav ul li {
 	list-style-type: none; 
 	display: inline-block; 
 	padding: 0.2em 0;
-	/*margin-left:auto;
-	margin-right:auto;
-	width:35%;*/
 }
 
 nav ul li a { 
-	padding: 0 5px; 
-	font-size:200%;
+	padding: 0 10px; 
+	font-size:150%;
 	color: #fff;
 }
 nav ul li a:visited { 
@@ -181,4 +178,19 @@ div.field, div.actions {
 #error_explanation ul li { 
 	font-size: 12px; 
 	list-style: square;
+}
+
+/* sorting */
+.pretty th .current {
+  padding-right: 12px;
+  background-repeat: no-repeat;
+  background-position: right center;
+}
+
+.pretty th .asc {
+  background-image: url(/images/UpTriangle.png);
+}
+
+.pretty th .desc {
+  background-image: url(/images/DownTriangle.png);
 }

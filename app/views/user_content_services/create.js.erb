@@ -1,0 +1,14 @@
+var comment_form = $('<%= raw escape_javascript(render(:partial => "bank", :content_type => 'text/html'))%>');
+$("#bank-container").html(comment_form);
+$("#new_bank").activity(false);
+
+var el = $('#error-messages');
+<% if @userBanks.errors.any? %>
+  // Create a list of errors
+  var errors = $('<ul />');
+  <% @userBanks.errors.full_messages.each do |error| %>
+    errors.append('<li><%= escape_javascript( error ) %></li>');
+  <% end %>
+  // Display errors on form
+  el.find('.errors').html(errors);
+<% end %>

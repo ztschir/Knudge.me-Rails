@@ -13,16 +13,19 @@
 
 class User < ActiveRecord::Base
   # Security feature, list all items that are accessible from web app
+  require 'java'
+  require 'YodleeClient.jar'
+  module KnudgeMeYodleeCall
+    include_package "com.KnudgeMeYodlee"
+  end
+  
+  
   attr_accessor :password
-  attr_accessible :firstName, :middleName, :lastName, :email, :password, :password_confirmation
+  attr_accessible :email, :password, :password_confirmation
   
   # Validation
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   
-  validates :firstName, :presence => true,
-                        :length => {:maximum => 50};
-  validates :lastName, :presence => true,
-                       :length => {:maximum => 50};
   validates :email, :presence => true,
                     :format => { :with => email_regex },
                     :uniqueness => true;
@@ -32,39 +35,28 @@ class User < ActiveRecord::Base
   
   
    # Login functions
-   def has_password?(submitted_password)
-     encrypted_password == encrypt(submitted_password)
+   #def has_password?(submitted_password)
+   # encrypted_password == encrypt(submitted_password)
+   #end
+   
+   def self.find_by_id(id)
+     find(id) rescue nil
    end
+   
    def self.authenticate(email, submitted_password)
-     user = find_by_email(email)
+     userID = KnudgeMeYodleeCall::KnudgeMeYodlee.loginYodleeUser(email, submitted_password)
+     user = find_by_id(userID)
      return nil if user.nil?
-     return user if user.has_password?(submitted_password)
+     return user
    end
    def self.authenticate_with_salt(id, cookie_salt) 
      user = find_by_id(id)
      (user && user.salt == cookie_salt) ? user : nil
    end
   
-  # Encrypting the password                     
-  before_save :encrypt_password
-  
-  private
-  def encrypt_password
-    self.salt = make_salt 
-    if new_record? 
-      self.encrypted_password = encrypt(password)
-    end
-  end
-  def encrypt(string) 
-    secure_hash("#{salt}--#{string}")
-  end
-  def make_salt 
-    secure_hash("#{Time.now.utc}--#{password}")
-  end
-  def secure_hash(string) 
-    Digest::SHA2.hexdigest(string)
-  end
-  
   # Relationships
   has_many :transactions
+  has_many :predicted_transactions
+  has_many :user_content_services
+  has_one :categories
 end

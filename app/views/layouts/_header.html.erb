@@ -4,6 +4,7 @@
 <signin>
 	<ul>
 		<% if signed_in? %>
+			Welcome <b><%= current_user.email %></b>  
 			<li><%= link_to "Sign out", signout_path, :method => :delete %></li> 
 		<% else %>
 			<li><%= link_to "Sign in", signin_path %></li>
@@ -19,6 +20,7 @@
 		<% if signed_in? %>
 			<li><%= link_to "Account Settings", edit_user_path(current_user) %></li>
 			<li><%= link_to "Transactions", transactions_path%></li>
+			<li><%= link_to "Add Bank", user_content_services_path%></li>
 		<% end %>
 	</ul> 
 </nav>
