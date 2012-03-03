@@ -21,7 +21,8 @@ development:
   reconnect: false
   database: KnudgeMe
   pool: 5
-  host: 192.168.1.135
+  port:3306
+  host: zasoon.com
   username: mysql
   password: dxAT76SAC8CmNGKA
   
