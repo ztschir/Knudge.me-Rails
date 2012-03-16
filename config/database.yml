@@ -18,10 +18,9 @@
 development:
   adapter: jdbcmysql
   encoding: utf8
-  reconnect: false
+  reconnect: true
   database: KnudgeMe
   pool: 5
-  port:3306
   host: zasoon.com
   username: mysql
   password: dxAT76SAC8CmNGKA
