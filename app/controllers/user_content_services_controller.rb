@@ -9,10 +9,8 @@ class UserContentServicesController < ApplicationController
   end
   
   def index
-
-      @userBanks = UserContentService.new
-      @banks = YodleeContentServiceInfo.where("contentServiceDisplayName like ?", "%#{params[:q]}%")
-          .select('contentServiceId as id, contentServiceDisplayName as name').limit(10)
+    @user_banks = UserContentService.new
+    @banks = YodleeContentServiceInfo.content_service_display_name(params[:q]).select_id_and_name.limit(10)
 
     respond_to do |format|
       format.js
@@ -38,16 +36,16 @@ class UserContentServicesController < ApplicationController
     @userBanks = UserContentService.new
     if !params[:contentID] && params[:user_content_service][:content_tokens] && !params[:user_content_service][:content_tokens].empty?
       @user = current_user
-      @contentID = Integer(params[:user_content_service][:content_tokens]);
-      @bankForm = KnudgeMeYodleeCall::KnudgeMeYodlee.getHTMLForm(@user.id, @contentID);
+      @contentID = Integer(params[:user_content_service][:content_tokens])
+      @bankForm = KnudgeMeYodleeCall::KnudgeMeYodlee.getHTMLForm(@user.id, @contentID)
     elsif params[:contentID]
-      @user = current_user;
-      @contentID = Integer(params[:contentID]);
+      @user = current_user
+      @contentID = Integer(params[:contentID])
 
-      @htmlForm = self.request.body.read;
+      @htmlForm = self.request.body.read
       
       #@htmlForm = self.request.format;
-      @success = KnudgeMeYodleeCall::KnudgeMeYodlee.addItem(@user.id, @contentID, @htmlForm);
+      @success = KnudgeMeYodleeCall::KnudgeMeYodlee.addItem(@user.id, @contentID, @htmlForm)
       if @success
         flash[:success] = "Added bank"
       else
@@ -55,14 +53,14 @@ class UserContentServicesController < ApplicationController
       end
       
       
-      @bankForm = params.to_query;
+      @bankForm = params.to_query(:form)
       
     else
       @bankForm = " "
     end
   
     respond_to do |format|
-      format.html { redirect_to(:action => 'new') }
+      format.html { redirect_to :new }
       format.js
     end
 
