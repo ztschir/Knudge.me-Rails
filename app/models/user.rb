@@ -18,7 +18,11 @@ class User < ActiveRecord::Base
   module KnudgeMeYodleeCall
     include_package "com.KnudgeMeYodlee"
   end
-  
+  # Relationships
+  has_many :transactions
+  has_many :predicted_transactions
+  has_many :user_content_services
+  has_one :categories
   
   attr_accessor :password
   attr_accessible :email, :password, :password_confirmation
@@ -53,10 +57,4 @@ class User < ActiveRecord::Base
      user = find_by_id(id)
      (user && user.salt == cookie_salt) ? user : nil
    end
-  
-  # Relationships
-  has_many :transactions
-  has_many :predicted_transactions
-  has_many :user_content_services
-  has_one :categories
 end

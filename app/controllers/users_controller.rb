@@ -15,7 +15,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @users }
+      format.json { render :json => @user }
     end
   end
 
@@ -24,7 +24,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @user }
+      format.json { render :json => @user }
     end
   end
 
@@ -35,7 +35,7 @@ class UsersController < ApplicationController
     @user = User.new
     respond_to do |format|
       format.html # new.html.erb
-      format.json { render json: @user }
+      format.json { render :json => @user }
     end
   end
 
@@ -47,17 +47,17 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
-    #@user = User.new(params[:user])
-    userID = KnudgeMeYodleeCall::KnudgeMeYodlee.registrarYodleeUser(params[:user][:email], params[:user][:password])
+    @user = User.new(params[:user])
+    user_id = KnudgeMeYodleeCall::KnudgeMeYodlee.registrarYodleeUser(params[:user][:email], params[:user][:password])
     respond_to do |format|
-      if userID != -1
+      unless userID == -1
         @user = User.find_by_id(userID)
         sign_in @user
         flash[:success] = "Welcome to Knudge.Me"
         format.html { redirect_to @user }
       else
-        format.html { render action: "new" }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+        format.html { render :action => :new }
+        format.json { render :json => @user.errors, :status => :unprocessable_entity }
         @title = "Sign up"
       end
     end
@@ -73,8 +73,8 @@ class UsersController < ApplicationController
         #format.json { head :ok }
       else
         @title = "Edit user"
-        format.html { render action: "edit" }
-        #format.json { render json: @user.errors, status: :unprocessable_entity }
+        format.html { render :action => :edit }
+        #format.json { render json @user.errors, status: :unprocessable_entity }
       end
     end
   end
