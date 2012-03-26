@@ -51,7 +51,8 @@ class UsersController < ApplicationController
     userID = KnudgeMeYodleeCall::KnudgeMeYodlee.registrarYodleeUser(params[:user][:email], params[:user][:password])
     respond_to do |format|
       if userID != -1
-        sign_in find_by_id(@userID)
+        @user = User.find_by_id(userID)
+        sign_in @user
         flash[:success] = "Welcome to Knudge.Me"
         format.html { redirect_to @user }
       else
