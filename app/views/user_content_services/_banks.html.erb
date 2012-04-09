@@ -1,0 +1,10 @@
+<%= label_tag "banks", "Current Banks" %>
+<br>
+<% unless banks.empty? %>
+  <% banks.each do |bank| %>
+    <%= bank.name %>
+    <br>
+  <% end %>
+<% else %>
+  <p>You haven't added any banks yet.</p>
+<% end %>

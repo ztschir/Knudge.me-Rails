@@ -7,11 +7,11 @@ $ ->
     crossDomain: false
     theme: "facebook"
 
-	loadBankFunction = ->
+loadBankFunction = ->
 	  $("#new_bank").activity()
-	loadFullFunction = ->
+loadFullFunction = ->
 	  $("#full_form").activity()
 	
-	window.onload = ->
+window.onload = ->
 	  $("#addBank").click loadBankFunction
 	  $("#addFilledForm").click loadFullFunction

@@ -4,16 +4,23 @@
 <div id="error-messages">
 
 </div>
+
   <p>
-    <%= f.label :content_tokens, "Banks" %><br />
+    <%= f.label :content_tokens, "Add A Bank" %><br />
     <%= f.text_field :content_tokens %>
   </p>
   <p>
 	<%= submit_tag "Add Bank", :id=> "addBank"%>
 
+
   </p>
+
 <% end %>
 </div>
-<div id="bank-container">
-</div>
+  <div id="credentials">
+    <%= render :partial => "credentials", :locals => { :credentials => nil } %>
+  </div>
+  <div id="banks">
+    <%= render :partial => "banks", :locals => { :banks => @banks }  %>
+  </div>
 </div>

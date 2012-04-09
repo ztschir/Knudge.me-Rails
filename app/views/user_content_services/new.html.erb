@@ -1,5 +1,3 @@
-<%= form_tag url_for(:controller => "user_content_services", :action => :create, :contentID => @contentID) do  %>
-
-	<%= @bankForm.html_safe %>
-	
+<%= form_tag url_for(:controller => "user_content_services", :action => :create, :contentID => @content_id, :credentials => @credentials) do  %>
+    <%= render :partial => "credentials", :locals => { :credentials => @credentials } %>
 <% end %>

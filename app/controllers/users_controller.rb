@@ -50,7 +50,7 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
     user_id = KnudgeMeYodleeCall::KnudgeMeYodlee.registrarYodleeUser(params[:user][:email], params[:user][:password])
     respond_to do |format|
-      unless userID == -1
+      unless user_id == -1
         @user = User.find_by_id(userID)
         sign_in @user
         flash[:success] = "Welcome to Knudge.Me"

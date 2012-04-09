@@ -10,7 +10,7 @@ class UserContentServicesController < ApplicationController
   
   def index
     @user_banks = UserContentService.new
-    @banks = YodleeContentServiceInfo.content_service_display_name(params[:q]).select_id_and_name.limit(10)
+    refresh_banks_list
 
     respond_to do |format|
       format.js
@@ -33,30 +33,14 @@ class UserContentServicesController < ApplicationController
   end
 
   def create
-    @userBanks = UserContentService.new
-    if !params[:contentID] && params[:user_content_service][:content_tokens] && !params[:user_content_service][:content_tokens].empty?
-      @user = current_user
-      @contentID = Integer(params[:user_content_service][:content_tokens])
-      @bankForm = KnudgeMeYodleeCall::KnudgeMeYodlee.getHTMLForm(@user.id, @contentID)
-    elsif params[:contentID]
-      @user = current_user
-      @contentID = Integer(params[:contentID])
-
-      @htmlForm = self.request.body.read
-      
-      #@htmlForm = self.request.format;
-      @success = KnudgeMeYodleeCall::KnudgeMeYodlee.addItem(@user.id, @contentID, @htmlForm)
-      if @success
-        flash[:success] = "Added bank"
-      else
-        flash[:error] = "Could not add bank, please enter credentials again"
-      end
-      
-      
-      @bankForm = params.to_query(:form)
-      
+    @user_banks = UserContentService.new
+    @content_id = content_id
+    success = KnudgeMeYodleeCall::KnudgeMeYodlee.addItem(current_user.id, @content_id, params.to_query(:form))
+    if success
+      flash[:success] = "Added bank"
     else
-      @bankForm = " "
+      flash[:error] = "Could not add bank, please enter credentials again"
+      @credentials = nil
     end
   
     respond_to do |format|
@@ -72,6 +56,35 @@ class UserContentServicesController < ApplicationController
 
   def destroy
 
+  end
+
+  def load_credentials
+    @credentials = JSON.parse(%Q(#{params[:credentials]}))
+    respond_to do |format|
+      format.js {render :layout => false}
+    end
+  end
+
+  def load_banks
+    refresh_banks_list
+    respond_to do |format|
+      format.js { render :layout => false }
+    end
+  end
+
+  private
+
+  def content_id
+    if !params[:contentID] && params[:user_content_service][:content_tokens] && !params[:user_content_service][:content_tokens].empty?
+      Integer(params[:user_content_service][:content_tokens])
+    elsif params[:contentID]
+      Integer(params[:contentID])
+    end
+  end
+
+
+  def refresh_banks_list
+    @banks = YodleeContentServiceInfo.content_service_display_name(params[:q]).select_id_and_name.limit(10)
   end
   
 end

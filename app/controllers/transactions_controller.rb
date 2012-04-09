@@ -23,6 +23,8 @@ class TransactionsController < ApplicationController
   
   private
 
+
+
   def sort_column
     Transaction.column_names.include?(params[:sort]) ? params[:sort] : "name"
   end
