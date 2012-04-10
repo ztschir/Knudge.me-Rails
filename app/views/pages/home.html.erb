@@ -1,2 +1,24 @@
-<h1>Welcome to Knudge.Me</h1> 
-  <p></p> 
+<%= button_to "Login", new_session_path, :class => "signin", :method => :get %>
+<br>
+<div class="container">
+  <div class="explanation"><p>Explanation as to what we do to keep your data safe</p></div>
+  <div class="explanation"><p>We simplify the savings process by giving you personalized financial recommendations built
+    around your savings goals and spending habits.</p>
+  </div>
+  <div class="explanation"><p>No more charts and graphs that leave you with a sense of "what's next?" Sign up to start taking action today.</p></div>
+</div>
+
+<h2 style="text-align: center">Your own personal financial advisor. For free.</h2>
+
+<% form_for User.new do |f| %>
+	<%= f.label :email %><br />
+	<%= f.text_field :email %>
+
+	<%= f.label :password %><br />
+	<%= f.password_field :password %>
+
+	<%= f.label :password_confirmation, "Confirmation" %><br />
+	<%= f.password_field :password_confirmation %>
+
+	<%= f.submit "Submit" %>
+<% end %>

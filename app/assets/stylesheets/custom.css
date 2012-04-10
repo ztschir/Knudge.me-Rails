@@ -2,7 +2,7 @@
 	width: 710px;
 }
 body {
-	background: #fff;
+	background: #dedede;
 }
 header { 
 	padding-top: 20px;
@@ -35,29 +35,29 @@ a:visited {
 }
 
 /* signin button */
-signin {
+.signin {
 	float: right;
 }
 
-signin ul { 
+.signin ul {
 	margin: 0; 
 	padding: 0;
 }
-signin ul li { 
+.signin ul li {
 	list-style-type: none; 
 	display: inline-block; 
 	padding: 0.2em 0;
 }
 
-signin ul li a { 
+.signin ul li a {
 	padding: 0 5px; 
 	font-size:100%;
 	color: #000;
 }
-signin ul li a:visited { 
+.signin ul li a:visited {
 	color: #000;
 }
-signin ul li a:hover { 
+.signin ul li a:hover {
 	text-decoration: underline;
 	color: #000;
 }
@@ -193,4 +193,22 @@ div.field, div.actions {
 
 .pretty th .desc {
   background-image: url(/images/DownTriangle.png);
+}
+
+
+
+.explanation {
+    text-align: center;
+    background-color: #efefef;
+    float: left;
+    width: 24%;
+    min-height: 80%;
+    height: auto !important;
+    max-height: 80%;
+    margin: 3%;
+    padding: 1%;
+}
+
+.explanation p {
+    vertical-align: middle;
 }
